@@ -1,0 +1,12 @@
+runtime: python38
+
+instance_class: F2
+
+env_variables:
+  SAMPLE_VARIABLE: "haha"
+
+handlers:
+  - 
+  # fallback catch-all handler
+  - url: /.*
+    static_files: always
