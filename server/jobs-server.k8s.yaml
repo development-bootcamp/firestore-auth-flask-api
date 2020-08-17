@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobs-server
+  labels:
+    app: jobs-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jobs-server
+  template:
+    metadata:
+      labels:
+        app: jobs-server
+    spec:
+      containers:
+      - name: jobs-server
+        image: mattfeng/jobs-server:1.0
+        volumeMounts:
+        - name: adminsdk
+          mountPath: "/etc/adminsdk"
+          readOnly: true
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/etc/adminsdk/creds"
+        ports:
+        - containerPort: 9000
+      volumes:
+      - name: adminsdk
+        secret:
+          secretName: firebase-adminsdk-creds
+          items:
+          - key: jsonfile
+            path: creds
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: job-scheduler-api # also determined by .env.production
+spec:
+  selector:
+    app: jobs-server
+  ports:
+  - protocol: TCP
+    port: 10000 # determined by .env.production in Vue app
+    targetPort: 9000

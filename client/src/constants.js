@@ -1,13 +1,13 @@
 export default {
   firebaseConfig: {
-    apiKey: "AIzaSyBJtDdFIlOoegLQ-YbzU8NX-RUVwC2nTLU",
-    authDomain: "personal-projects-286217.firebaseapp.com",
-    databaseURL: "https://personal-projects-286217.firebaseio.com",
-    projectId: "personal-projects-286217",
-    storageBucket: "personal-projects-286217.appspot.com",
-    messagingSenderId: "159524111135",
-    appId: "1:159524111135:web:46ea9d05da854ed045262a",
-    measurementId: "G-MBLCW7J3GL",
+    apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+    authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.VUE_APP_FIREBASE_DATABASE_URL,
+    projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.VUE_APP_FIREBASE_APP_ID,
+    measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID,
   },
-  serverURI: "http://localhost:5000"
+  serverURI: process.env.VUE_APP_SERVER_URI
 }

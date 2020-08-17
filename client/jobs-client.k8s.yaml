@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobs-client
+  labels:
+    app: jobs-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jobs-client
+  template:
+    metadata:
+      labels:
+        app: jobs-client
+    spec:
+      containers:
+      - name: jobs-client
+        image: mattfeng/jobs-client:1.0.1
+        ports:
+        - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: jobs-client
+spec:
+  selector:
+    app: jobs-client
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80

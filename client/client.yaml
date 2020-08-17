@@ -1,9 +1,0 @@
-# source: https://stackoverflow.com/questions/55260646/how-to-deploy-vue-js-app-on-google-app-engine
-runtime: nodejs10
-handlers:
-  - url: /(.*\..+)$
-    static_files: dist/\1
-    upload: dist/(.*\..+)$
-  - url: /.*
-    static_files: dist/index.html
-    upload: dist/index.html
