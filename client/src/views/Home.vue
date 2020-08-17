@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Job runner | Home</h1>
+    <h1>Job runner</h1>
   </div>
 </template>
 

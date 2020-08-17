@@ -8,5 +8,6 @@ export default {
     messagingSenderId: "159524111135",
     appId: "1:159524111135:web:46ea9d05da854ed045262a",
     measurementId: "G-MBLCW7J3GL",
-  }
+  },
+  serverURI: "http://localhost:5000"
 }

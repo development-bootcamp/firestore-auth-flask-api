@@ -1,34 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/login" v-if="!loggedIn">Login</router-link>
-      <router-link to="/register" v-if="!loggedIn">Register</router-link>
-      <router-link to="/jobs" v-if="loggedIn">Jobs</router-link>
-    </div>
-    <p>
-      {{ getUser && getUser.email }}
-    </p>
-    <router-view/>
+    <Navbar />
+    <router-view />
   </div>
 </template>
 
 <script>
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
-
-import { mapGetters, mapActions } from 'vuex'
+import Navbar from './components/Navbar.vue'
 
 export default {
-  computed: {
-    ...mapGetters(['getUser']),
-    loggedIn() {
-      return this.getUser !== null;
-    }
+  components: {
+    Navbar
   },
-  methods: {
-    ...mapActions(['updateUserState'])
-  }
 }
 </script>
 
@@ -38,21 +23,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-
-#nav {
-  display: flex;
-  justify-content: space-between;
-
-  padding: 30px;
-
-  a {
-    color: #42b983;
-
-    &.router-link-exact-active {
-      font-weight: bold;
-      color: #2c3e50;
-    }
-  }
 }
 </style>
