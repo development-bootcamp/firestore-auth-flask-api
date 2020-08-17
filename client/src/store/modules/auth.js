@@ -18,32 +18,29 @@ const getters = {
 const actions = {
   updateUserState({ commit }, user) {
     commit('setUser', user)
+
+    if (user) {
+      router.push('/jobs')
+    } else {
+      router.push('/login')
+    }
   },
-  signUpAction({ commit }, { name, email, password }) {
+  async signUpAction({ commit }, { name, email, password }) {
     commit('setRegisterPageStatus', 'Signing you up...')
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(resp => {
-        commit('setRegisterPageStatus', 'Sign up successful. Please login now.')
-        commit('setUser', resp.user)
-
-        router.push('/verify')
-
-        return resp.user
-      })
-      .then((user) => {
-        user.updateProfile({
-          displayName: name
-        })
-        user.sendEmailVerification()
-      })
-      .catch(err => {
-        let message = 'Registration failed. Please try again.'
-        if (err.code === 'auth/email-already-in-use') {
-          message = 'This email account is already in use; please try another.'
-        }
-        commit('setRegisterPageStatus', message)
-        console.error(err)
-      })
+    try {
+      const resp = await firebase.auth().createUserWithEmailAndPassword(email, password)
+      const user = resp.user
+      commit('setRegisterPageStatus', 'Sign up successful. Please login now.')
+      await user.updateProfile({displayName: name})
+      await user.sendEmailVerification()
+    } catch (err) {
+      let message = 'Registration failed. Please try again.'
+      if (err.code === 'auth/email-already-in-use') {
+        message = 'This email account is already in use; please try another.'
+      }
+      commit('setRegisterPageStatus', message)
+      console.error(err)
+    }
   },
   signInAction({ commit }, { email, password }) {
     commit('setLoginPageStatus', 'Logging in...')

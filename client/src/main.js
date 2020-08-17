@@ -19,8 +19,16 @@ Vue.use(IconsPlugin)
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+let app
+
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch('updateUserState', user)
+
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount('#app')
+  }
+})

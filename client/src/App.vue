@@ -20,17 +20,6 @@ import 'firebase/auth'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  created() {
-    firebase.auth().onAuthStateChanged((resp) => {
-      this.updateUserState(resp.user)
-
-      if (resp.user) {
-        this.$router.push('/jobs')
-      } else {
-        this.$router.push('/login')
-      }
-    })
-  },
   computed: {
     ...mapGetters(['getUser']),
     loggedIn() {

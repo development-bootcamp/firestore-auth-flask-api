@@ -48,8 +48,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   let currentUser = firebase.auth().currentUser
 
-  // console.log(to.path)
-  // console.log(currentUser !== null, currentUser !== null ? currentUser.emailVerified : false)
+  console.log(to.path)
+  console.log(currentUser !== null, currentUser !== null ? currentUser.emailVerified : false)
 
   if (currentUser !== null && currentUser.emailVerified) {
     if (to.path === '/login' ||

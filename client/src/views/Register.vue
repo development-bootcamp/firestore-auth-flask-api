@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Register</h1>
      <b-form @submit.prevent="registerAccount">
       <b-form-group
         id="ig-name"
